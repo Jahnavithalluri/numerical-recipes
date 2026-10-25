@@ -1,6 +1,6 @@
 #ifndef NUMERICAL_RECIPES_H
 #define NUMERICAL_RECIPES_H
-
+#include <stddef.h>
 /*
  * Bisection Method
  *
@@ -58,33 +58,42 @@ double secant(double (*f)(double),
               double tolerance);
 
 
-/* =========================================
-   Numerical Differentiation
-   ========================================= */
+/*
+ * Linear Interpolation
+ * Estimates y at a given x using two known data points.
+ *
+ * x0, y0 - coordinates of the first point
+ * x1, y1 - coordinates of the second point
+ * x      - the position where we want to estimate y
+ *
+ * Requirements:
+ * - x0 and x1 must be different
+ * - Invalid input will return NAN
+ */
+double linear_interpolation(double x0, double y0,
+                            double x1, double y1,
+                            double x);
+
+
+double lagrange_interpolation(const double x_values[],
+                              const double y_values[],
+                              size_t n,
+                              double x);
 
 /*
- * Estimates the first derivative of f at x
- * using the forward difference formula.
+ * Newton Divided-Difference Interpolation
+ * Estimates y at a target x using multiple data points.
  *
- * f : function to differentiate
- * x : point where derivative is estimated
- * h : positive step size
+ * x_values - array of known x-coordinates
+ * y_values - array of known y-coordinates
+ * n        - number of data points
+ * x        - position where we want to estimate y
  *
- * Returns the estimated derivative,
- * or NAN if the input or calculation is invalid.
+ * Returns NAN for invalid input.
  */
-double forward_difference(double (*f)(double),
-                          double x,
-                          double h);
-                          
-/* Backward difference: [f(x) - f(x-h)] / h */
-double backward_difference(double (*f)(double),
-                           double x,
-                           double h);
+double newton_interpolation(const double x_values[],
+                            const double y_values[],
+                            size_t n,
+                            double x);
 
-/* Central difference: [f(x+h) - f(x-h)] / (2*h) */
-double central_difference(double (*f)(double),
-                          double x,
-                          double h);
-                          
 #endif
