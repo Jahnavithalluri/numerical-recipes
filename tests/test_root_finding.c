@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stddef.h>
 #include <math.h>
@@ -19,8 +18,7 @@ static void check_close(const char *name,
 {
     tests_run++;
 
-    if (isfinite(actual) &&
-        fabs(actual - expected) <= tolerance) {
+    if (isfinite(actual) && fabs(actual - expected) <= tolerance) {
         printf("PASSED: %s\n", name);
         tests_passed++;
     } else {
@@ -94,6 +92,15 @@ static double f_infinity(double x)
     return INFINITY;
 }
 
+/* Return infinity only at the right endpoint / second guess. */
+static double f_inf_at_2(double x)
+{
+    if (x == 2.0) {
+        return INFINITY;
+    }
+    return x - 1.5;
+}
+
 static double df_zero(double x)
 {
     (void)x;
@@ -112,13 +119,19 @@ static double df_infinity(double x)
     return INFINITY;
 }
 
-/* Returns NAN at x=0 but valid values elsewhere */
+/* Make the Newton step overflow: 5.0 / 1e-308 > DBL_MAX. */
+static double df_tiny(double x)
+{
+    (void)x;
+    return 1e-308;
+}
+
+/* Returns NAN at x = 0 but valid values elsewhere. */
 static double f_nan_at_zero(double x)
 {
     if (x == 0.0) {
         return NAN;
     }
-
     return x;
 }
 
@@ -196,11 +209,10 @@ int main(void)
               bisection(f_nan, 1.0, 2.0, tolerance));
 
     check_nan("f(b) returns infinity",
-              bisection(f_infinity, 1.0, 2.0, tolerance));
+              bisection(f_inf_at_2, 1.0, 2.0, tolerance));
 
     check_nan("f(midpoint) returns NAN",
-              bisection(f_nan_at_zero, -1.0, 1.0,
-                        tolerance));
+              bisection(f_nan_at_zero, -1.0, 1.0, tolerance));
 
     /* =====================================
        NEWTON-RAPHSON TESTS
@@ -209,75 +221,58 @@ int main(void)
     printf("\n--- Newton-Raphson Method ---\n");
 
     check_close("Root of x^2 - 2",
-                newton_raphson(f_sqrt2, df_sqrt2,
-                               1.5, tolerance),
+                newton_raphson(f_sqrt2, df_sqrt2, 1.5, tolerance),
                 sqrt(2.0), 1e-6);
 
     check_close("Exact root",
-                newton_raphson(f_linear, df_linear,
-                               5.0, tolerance),
+                newton_raphson(f_linear, df_linear, 5.0, tolerance),
                 5.0, 1e-9);
 
     check_close("Linear function from another guess",
-                newton_raphson(f_linear, df_linear,
-                               0.0, tolerance),
+                newton_raphson(f_linear, df_linear, 0.0, tolerance),
                 5.0, 1e-9);
 
     check_nan("NULL function pointer",
-              newton_raphson(NULL, df_sqrt2,
-                             1.5, tolerance));
+              newton_raphson(NULL, df_sqrt2, 1.5, tolerance));
 
     check_nan("NULL derivative pointer",
-              newton_raphson(f_sqrt2, NULL,
-                             1.5, tolerance));
+              newton_raphson(f_sqrt2, NULL, 1.5, tolerance));
 
     check_nan("Initial guess is NAN",
-              newton_raphson(f_sqrt2, df_sqrt2,
-                             NAN, tolerance));
+              newton_raphson(f_sqrt2, df_sqrt2, NAN, tolerance));
 
     check_nan("Initial guess is infinity",
-              newton_raphson(f_sqrt2, df_sqrt2,
-                             INFINITY, tolerance));
+              newton_raphson(f_sqrt2, df_sqrt2, INFINITY, tolerance));
 
     check_nan("Tolerance is zero",
-              newton_raphson(f_sqrt2, df_sqrt2,
-                             1.5, 0.0));
+              newton_raphson(f_sqrt2, df_sqrt2, 1.5, 0.0));
 
     check_nan("Tolerance is negative",
-              newton_raphson(f_sqrt2, df_sqrt2,
-                             1.5, -0.1));
+              newton_raphson(f_sqrt2, df_sqrt2, 1.5, -0.1));
 
     check_nan("Tolerance is NAN",
-              newton_raphson(f_sqrt2, df_sqrt2,
-                             1.5, NAN));
+              newton_raphson(f_sqrt2, df_sqrt2, 1.5, NAN));
 
     check_nan("Tolerance is infinity",
-              newton_raphson(f_sqrt2, df_sqrt2,
-                             1.5, INFINITY));
+              newton_raphson(f_sqrt2, df_sqrt2, 1.5, INFINITY));
 
     check_nan("Function returns NAN",
-              newton_raphson(f_nan, df_linear,
-                             1.5, tolerance));
+              newton_raphson(f_nan, df_linear, 1.5, tolerance));
 
     check_nan("Function returns infinity",
-              newton_raphson(f_infinity, df_linear,
-                             1.5, tolerance));
+              newton_raphson(f_infinity, df_linear, 1.5, tolerance));
 
     check_nan("Derivative returns NAN",
-              newton_raphson(f_sqrt2, df_nan,
-                             1.5, tolerance));
+              newton_raphson(f_sqrt2, df_nan, 1.5, tolerance));
 
     check_nan("Derivative returns infinity",
-              newton_raphson(f_sqrt2, df_infinity,
-                             1.5, tolerance));
+              newton_raphson(f_sqrt2, df_infinity, 1.5, tolerance));
 
     check_nan("Derivative is zero",
-              newton_raphson(f_sqrt2, df_zero,
-                             1.5, tolerance));
+              newton_raphson(f_sqrt2, df_zero, 1.5, tolerance));
 
     check_nan("Next approximation overflows",
-              newton_raphson(f_constant, df_linear,
-                             1e308, tolerance));
+              newton_raphson(f_constant, df_tiny, 1e308, tolerance));
 
     /* =====================================
        SECANT TESTS
@@ -335,7 +330,7 @@ int main(void)
               secant(f_nan, 1.0, 2.0, tolerance));
 
     check_nan("f(x1) returns infinity",
-              secant(f_infinity, 1.0, 2.0, tolerance));
+              secant(f_inf_at_2, 1.0, 2.0, tolerance));
 
     check_nan("Equal function values",
               secant(f_constant, 1.0, 2.0, tolerance));
