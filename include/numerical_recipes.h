@@ -96,4 +96,33 @@ double newton_interpolation(const double x_values[],
                             size_t n,
                             double x);
 
+/* =========================================
+   Numerical Differentiation
+   ========================================= */
+
+/*
+ * Estimates the first derivative of f at x
+ * using the forward difference formula.
+ *
+ * f : function to differentiate
+ * x : point where derivative is estimated
+ * h : positive step size
+ *
+ * Returns the estimated derivative,
+ * or NAN if the input or calculation is invalid.
+ */
+double forward_difference(double (*f)(double),
+                          double x,
+                          double h);
+                          
+/* Backward difference: [f(x) - f(x-h)] / h */
+double backward_difference(double (*f)(double),
+                           double x,
+                           double h);
+
+/* Central difference: [f(x+h) - f(x-h)] / (2*h) */
+double central_difference(double (*f)(double),
+                          double x,
+                          double h);
+
 #endif
