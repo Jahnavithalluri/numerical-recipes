@@ -1,6 +1,6 @@
 #ifndef NUMERICAL_RECIPES_H
 #define NUMERICAL_RECIPES_H
-
+#include <stddef.h>
 /*
  * Bisection Method
  *
@@ -27,5 +27,43 @@ double bisection(double (*f)(double),
                  double a,
                  double b,
                  double tolerance);
+
+/*
+ * Linear Interpolation
+ * Estimates y at a given x using two known data points.
+ *
+ * x0, y0 - coordinates of the first point
+ * x1, y1 - coordinates of the second point
+ * x      - the position where we want to estimate y
+ *
+ * Requirements:
+ * - x0 and x1 must be different
+ * - Invalid input will return NAN
+ */
+double linear_interpolation(double x0, double y0,
+                            double x1, double y1,
+                            double x);
+
+
+double lagrange_interpolation(const double x_values[],
+                              const double y_values[],
+                              size_t n,
+                              double x);
+
+/*
+ * Newton Divided-Difference Interpolation
+ * Estimates y at a target x using multiple data points.
+ *
+ * x_values - array of known x-coordinates
+ * y_values - array of known y-coordinates
+ * n        - number of data points
+ * x        - position where we want to estimate y
+ *
+ * Returns NAN for invalid input.
+ */
+double newton_interpolation(const double x_values[],
+                            const double y_values[],
+                            size_t n,
+                            double x);
 
 #endif
