@@ -1,0 +1,7 @@
+====================================
+ ALLOCATION FAILURE INJECTION TESTS
+====================================
+[PASS] Forced malloc failure returns NAN
+[PASS] Successful retry after allocation failure
+ALLOCATION TEST SUMMARY: 2 passed, 0 failed, 2 total
+Newton Interpolation Error: Memory allocation failed.

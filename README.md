@@ -1,367 +1,177 @@
-# Numerical Recipes
+# Numerical Recipes Library (C11)
 
-A modular, dependency-light numerical methods library written in **C11**, implementing classical algorithms for root finding, numerical differentiation, and interpolation.
-
-The project includes example programs, automated tests, input validation, and descriptive error messages.
+A modular C11 library implementing common numerical methods for root finding, numerical differentiation, and interpolation. The project separates reusable library code from demonstration programs and automated tests.
 
 ## Features
 
-- Nine numerical methods across three modules
-- Modular C11 implementation
-- Input validation and numerical error handling
-- Descriptive error messages printed to `stderr`
-- `NAN` returned when a calculation fails
-- Automated tests for valid inputs and error conditions
-- Incremental builds using a Makefile
-- Compatible with MinGW GCC on Windows
+- **Root finding:** bisection, Newton–Raphson, and secant methods.
+- **Numerical differentiation:** forward, backward, and central finite differences.
+- **Interpolation:** linear interpolation/extrapolation, Lagrange polynomial interpolation, and Newton divided-difference interpolation.
+- **Reusable static library:** `lib/libnumerical_recipes.a`.
+- **Validation and diagnostics:** invalid inputs and detected numerical failures are reported to `stderr`; numerical functions return `NAN` on detected failure.
+- **Testing:** normal, boundary, invalid-input, robustness, repeated-call, and controlled allocation-failure tests.
+- **Separate examples:** each demo is a separate executable; the library itself does not contain a `main()` function.
 
-## Project Structure
+## Requirements
 
-```text
-numerical-recipes/
-│
-├── include/
-│   └── numerical_recipes.h
-│
-├── src/
-│   ├── root_finding.c
-│   ├── differentiation.c
-│   └── interpolation.c
-│
-├── examples/
-│   ├── demo_root_finding.c
-│   └── demo_differentiation.c
-│
-├── tests/
-│   ├── test_root_finding.c
-│   ├── test_differentiation.c
-│   └── test_interpolation.c
-│
-├── build/
-├── bin/
-├── Makefile
-├── README.md
-└── .gitignore
+The project has been built on Windows with **MinGW GCC 6.3.0** and `mingw32-make`. A C11-compatible compiler, GNU Make-compatible build tool, and standard C math library are required. The sanitizer checks described in the testing documentation were run in a Linux environment; sanitizer availability on Windows depends on the compiler/toolchain.
+
+## Build and test on Windows
+
+Run these commands from the project root in `cmd.exe`:
+
+```bat
+mingw32-make clean
+mingw32-make all
+mingw32-make test
+mingw32-make test-memory
 ```
 
-The `build/` directory contains compiled object files, while `bin/` contains executable programs. Both are generated during compilation.
+Targets:
 
-## Implemented Algorithms
+| Command | Purpose |
+|---|---|
+| `mingw32-make all` | Build the static library, demos, and regular test executables |
+| `mingw32-make library` | Build the static library |
+| `mingw32-make test` | Run root-finding, differentiation, interpolation, and robustness suites |
+| `mingw32-make test-memory` | Run controlled allocation-failure tests for Newton interpolation |
+| `mingw32-make clean` | Remove generated build products |
 
-### 1. Root Finding
+The test commands are separate: `test` runs **168 checks** and `test-memory` runs **2 additional checks**. The recorded Windows run passed all 170 checks.
 
-Implemented in `src/root_finding.c`.
+To verify the allocation-failure evidence saved by the project, run:
 
-**Bisection Method**
-
-Finds an approximate root of a continuous function within an interval whose endpoints bracket a root.
-
-```c
-double bisection(double (*f)(double),
-                 double a,
-                 double b,
-                 double tolerance);
+```bat
+type documentation\evidence\allocation_failure_windows.txt
 ```
 
-Requirements:
-- `a < b`
-- Positive, finite tolerance
-- A continuous function on the interval
-- Opposite signs at the endpoints, unless an endpoint is already a root
+## Run the demos
 
-**Newton–Raphson Method**
+After `mingw32-make all`, run the relevant executable from the project root:
 
-Uses a function and its derivative to iteratively approximate a root.
-
-```c
-double newton_raphson(double (*f)(double),
-                      double (*derivative)(double),
-                      double initial_guess,
-                      double tolerance);
+```bat
+bin\demo_root_finding.exe
+bin\demo_differentiation.exe
+bin\demo_interpolation.exe
 ```
 
-The derivative must not be zero when a Newton step is required.
+The demos illustrate numerical results and expected error handling. The temperature values in the interpolation demo are illustrative examples, not measured weather data.
 
-**Secant Method**
+## Use the library in your own program
 
-Approximates a root using two initial guesses without requiring a derivative function.
-
-```c
-double secant(double (*f)(double),
-              double x0,
-              double x1,
-              double tolerance);
-```
-
-The two initial guesses must be different. The method also requires distinct function values when computing each secant step.
-
-All three root-finding methods use a maximum of 1,000 iterations.
-
-### 2. Numerical Differentiation
-
-Implemented in `src/differentiation.c`.
-
-**Forward Difference**
-
-```c
-double forward_difference(double (*f)(double),
-                          double x,
-                          double h);
-```
-
-Formula:
-
-`f'(x) ≈ [f(x + h) - f(x)] / h`
-
-**Backward Difference**
-
-```c
-double backward_difference(double (*f)(double),
-                           double x,
-                           double h);
-```
-
-Formula:
-
-`f'(x) ≈ [f(x) - f(x - h)] / h`
-
-**Central Difference**
-
-```c
-double central_difference(double (*f)(double),
-                          double x,
-                          double h);
-```
-
-Formula:
-
-`f'(x) ≈ [f(x + h) - f(x - h)] / (2h)`
-
-All differentiation methods require:
-- A valid function pointer
-- Finite input `x`
-- A finite, positive step size `h`
-- Finite function evaluations and derivative results
-
-Central Difference generally provides better accuracy than Forward or Backward Difference for sufficiently smooth functions and an appropriately chosen step size.
-
-### 3. Numerical Interpolation
-
-Implemented in `src/interpolation.c`.
-
-**Linear Interpolation**
-
-Estimates a value using two data points.
-
-```c
-double linear_interpolation(double x0, double y0,
-                            double x1, double y1,
-                            double x);
-```
-
-The two x-coordinates must be different.
-
-**Lagrange Interpolation**
-
-Constructs and evaluates an interpolation polynomial using a collection of data points.
-
-```c
-double lagrange_interpolation(const double x_values[],
-                              const double y_values[],
-                              size_t n,
-                              double x);
-```
-
-**Newton Interpolation**
-
-Uses divided differences to construct and evaluate an interpolation polynomial.
-
-```c
-double newton_interpolation(const double x_values[],
-                            const double y_values[],
-                            size_t n,
-                            double x);
-```
-
-For Lagrange and Newton interpolation:
-- The input arrays must not be `NULL`
-- `n` must be greater than zero
-- All coordinates must be finite
-- All x-coordinates must be distinct
-- Each array must contain at least `n` elements
-
-## Error Handling
-
-All numerical methods follow the same error-handling convention.
-
-On failure, a function:
-
-1. Prints a descriptive error message to the standard error stream (`stderr`).
-2. Returns `NAN`.
-
-Possible errors include:
-- Invalid or non-finite inputs
-- `NULL` function pointers or arrays
-- Invalid tolerances or step sizes
-- Division by zero
-- Duplicate interpolation coordinates
-- Non-finite intermediate calculations
-- Memory allocation failure
-- Failure to converge within the iteration limit
-
-**Example:**
+Include the public header:
 
 ```c
 #include <stdio.h>
 #include <math.h>
 #include "numerical_recipes.h"
 
-static double square(double x)
+static double f(double x)
 {
-    return x * x;
+    return x * x - 2.0;
+}
+
+static double df(double x)
+{
+    return 2.0 * x;
 }
 
 int main(void)
 {
-    double result = forward_difference(square, 3.0, -0.1);
+    double root = newton_raphson(f, df, 1.0, 1e-8);
 
-    if (isnan(result)) {
-        printf("Differentiation failed.\n");
+    if (!isfinite(root)) {
+        fprintf(stderr, "Root-finding failed.\n");
         return 1;
     }
 
-    printf("Derivative: %.8f\n", result);
+    printf("Approximate root: %.10f\n", root);
     return 0;
 }
 ```
 
-The library prints:
+For a direct manual build with MinGW, assuming the library archive has already been built:
+
+```bat
+gcc -std=c11 -Wall -Wextra -Iinclude example.c -Llib -lnumerical_recipes -lm -o example.exe
+```
+
+Linking uses `-lnumerical_recipes` to select `libnumerical_recipes.a`, and `-lm` for math functions. If your build environment uses different paths or library naming conventions, adjust the command accordingly.
+
+## Project layout
 
 ```text
-Forward Difference Error: h must be finite and positive.
+numerical-recipes/
+├── include/
+│   └── numerical_recipes.h
+├── src/
+│   ├── root_finding.c
+│   ├── differentiation.c
+│   └── interpolation.c
+├── examples/
+│   ├── demo_root_finding.c
+│   ├── demo_differentiation.c
+│   └── demo_interpolation.c
+├── tests/
+│   ├── test_root_finding.c
+│   ├── test_differentiation.c
+│   ├── test_interpolation.c
+│   ├── test_robustness.c
+│   └── test_allocation_failure.c
+├── documentation/
+│   ├── architecture.md
+│   ├── algorithms.md
+│   ├── api_reference.md
+│   ├── memory_management.md
+│   ├── testing.md
+│   ├── references.md
+│   ├── team_contributions.md
+│   └── evidence/
+├── Makefile
+└── README.md
 ```
 
-The application detects the failure using `isnan()`.
+Generated output directories include `build/`, `bin/`, and `lib/`. The exact files present in those directories depend on whether the project has been built.
 
-**Note:** The library currently prints errors directly. Applications that need silent operation or structured error reporting may require a different error-handling API in the future.
+## API and numerical behavior
 
-## Requirements
+The public declarations and per-function contracts are documented in [`include/numerical_recipes.h`](include/numerical_recipes.h). See [`documentation/api_reference.md`](documentation/api_reference.md) for a method summary, [`documentation/algorithms.md`](documentation/algorithms.md) for formulas and limitations, and [`documentation/memory_management.md`](documentation/memory_management.md) for ownership and allocation behavior.
 
-- C11-compatible compiler
-- Standard C library
-- Math library (`math.h`)
-- GNU Make or `mingw32-make`
+General rules:
 
-The project has been developed for Windows using MinGW GCC 6.3.0.
+- Callbacks must be valid functions with the declared `double`-argument signature.
+- Input values and array elements must satisfy the preconditions documented in the header.
+- Detected invalid inputs, non-finite intermediate values, convergence failures, and allocation failures are reported with a diagnostic and return `NAN`.
+- A finite return value is an approximation; it does not automatically prove that the mathematical error is below the supplied tolerance.
+- The library does not guarantee convergence for all functions or starting values.
 
-## Build Instructions
+## Current test record
 
-Open Command Prompt in the project root directory.
+Recorded Windows build environment: MinGW GCC 6.3.0, `mingw32-make`.
 
-**Build all modules, examples, and tests:**
+| Suite | Checks passed | Checks failed |
+|---|---:|---:|
+| Root finding | 53 | 0 |
+| Differentiation | 58 | 0 |
+| Interpolation | 49 | 0 |
+| Robustness | 8 | 0 |
+| **`mingw32-make test` total** | **168** | **0** |
+| Allocation-failure injection (`test-memory`) | 2 | 0 |
+| **Combined recorded total** | **170** | **0** |
 
-```cmd
-mingw32-make all
-```
+Linux AddressSanitizer/UndefinedBehaviorSanitizer runs were also reported as passing without sanitizer diagnostics. See `documentation/testing.md`; retain only evidence files that were actually generated and checked in your working copy.
 
-**Build the demonstration programs:**
+## Documentation index
 
-```cmd
-mingw32-make demo
-```
+- [Architecture](documentation/architecture.md)
+- [Algorithms and limitations](documentation/algorithms.md)
+- [API reference](documentation/api_reference.md)
+- [Memory management](documentation/memory_management.md)
+- [Testing strategy and results](documentation/testing.md)
+- [References and attribution](documentation/references.md)
+- [Team contributions](documentation/team_contributions.md)
+- [Faculty submission checklist](documentation/submission_checklist.md)
 
-**Build and run all automated tests:**
+## Attribution and academic integrity
 
-```cmd
-mingw32-make test
-```
-
-**Remove compiled files:**
-
-```cmd
-mingw32-make clean
-```
-
-**Perform a clean rebuild and run all tests:**
-
-```cmd
-mingw32-make clean
-mingw32-make all
-mingw32-make test
-```
-
-## Running the Examples
-
-After building, run the Root Finding demonstration:
-
-```cmd
-bin\demo_root_finding.exe
-```
-
-Run the Numerical Differentiation demonstration:
-
-```cmd
-bin\demo_differentiation.exe
-```
-
-## Automated Testing
-
-Each numerical module has its own test file.
-
-| Test file | Algorithms tested |
-|---|---|
-| `tests/test_root_finding.c` | Bisection, Newton–Raphson, Secant |
-| `tests/test_differentiation.c` | Forward, Backward, Central Difference |
-| `tests/test_interpolation.c` | Linear, Lagrange, Newton Interpolation |
-
-The tests check numerical accuracy, invalid inputs, special cases, and error handling.
-
-To run individual test executables:
-
-```cmd
-bin\test_root_finding.exe
-bin\test_differentiation.exe
-bin\test_interpolation.exe
-```
-
-Some tests intentionally supply invalid inputs. Therefore, error messages appearing during successful test runs are expected.
-
-Each test program returns exit code `0` when all its checks pass and a nonzero exit code when at least one check fails.
-
-## Development Conventions
-
-- Public API declarations belong in `include/numerical_recipes.h`.
-- Algorithm implementations belong in `src/`.
-- Demonstration programs belong in `examples/`.
-- Automated tests belong in `tests/`.
-- Generated object files belong in `build/`.
-- Generated executables belong in `bin/`.
-- Validate inputs before performing numerical calculations.
-- Return `NAN` and print a meaningful error when a calculation fails.
-- Keep existing public function signatures stable when extending the library.
-- Compile with `-Wall -Wextra` to identify potential problems.
-
-## Limitations
-
-Numerical methods operate with finite-precision floating-point arithmetic. Their results can be affected by rounding, cancellation, overflow, underflow, and the choice of tolerance or step size.
-
-Root-finding algorithms are not guaranteed to converge for every function or initial guess.
-
-Interpolation can become numerically unstable with unsuitable data points or high-degree polynomials.
-
-A returned finite value does not necessarily guarantee a particular mathematical accuracy. Users should select algorithms and parameters appropriate to their problem.
-
-## Future Improvements
-
-Potential future modules and enhancements include:
-
-- Numerical Integration
-- Solving Systems of Linear Equations
-- Ordinary Differential Equation Solvers
-- More detailed error-status reporting
-- Additional numerical stability checks
-- Performance benchmarking
-
-## License
-
-A license has not yet been specified for this project.
+The numerical techniques in this project are standard numerical-analysis methods. List any textbooks, tutorials, documentation, or source code that materially informed the implementation in `documentation/references.md`, and follow your course's rules for external assistance and AI-tool disclosure. Do not claim a contribution or source attribution that you cannot verify.

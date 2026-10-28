@@ -46,7 +46,7 @@ TEST_INTERP := $(BIN_DIR)/test_interpolation$(EXE)
 TEST_ROBUST := $(BIN_DIR)/test_robustness$(EXE)
 TEST_TARGETS := $(TEST_ROOT) $(TEST_DIFF) $(TEST_INTERP) $(TEST_ROBUST)
 
-.PHONY: all library demo test clean
+.PHONY: all library demo test test-memory clean
 
 all: library $(DEMO_TARGETS) $(TEST_TARGETS)
 library: $(STATIC_LIB)
@@ -90,3 +90,14 @@ clean:
 	@$(call REMOVE_DIR,$(BUILD_DIR))
 	@$(call REMOVE_DIR,$(BIN_DIR))
 	@$(call REMOVE_DIR,$(LIB_DIR))
+
+# Optional deterministic allocation-failure tests. The production library is
+# never changed: this target builds an isolated copy of interpolation.c.
+$(BUILD_DIR)/interpolation_allocfail.o: $(SRC_DIR)/interpolation.c $(HEADER) | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -Dmalloc=nr_test_malloc -c $< -o $@
+
+$(BIN_DIR)/test_allocation_failure$(EXE): $(TESTS_DIR)/test_allocation_failure.c $(BUILD_DIR)/interpolation_allocfail.o $(HEADER) | $(BIN_DIR)
+	$(CC) $(CFLAGS) $(TESTS_DIR)/test_allocation_failure.c $(BUILD_DIR)/interpolation_allocfail.o $(LDLIBS) -o $@
+
+test-memory: $(BIN_DIR)/test_allocation_failure$(EXE)
+	@$(BIN_DIR)/test_allocation_failure$(EXE)
