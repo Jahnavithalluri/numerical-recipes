@@ -1,37 +1,45 @@
 # Team Contributions
 
-> **Important:** Replace this template with the actual contribution record before submission. Do not leave unverified names, percentages, or claims in the final report.
+## Team Overview
 
-## Team details
+The Numerical Recipes Library in C11 was developed collaboratively by three team members. Each member took primary responsibility for a different numerical-methods module, while all three members worked together on the project presentation.
 
-| Member name | Student ID (if required by course) | Role / area |
-|---|---|---|
-| `[Member 1]` | `[ID or omit]` | `[Actual role]` |
-| `[Member 2]` | `[ID or omit]` | `[Actual role]` |
-| `[Add rows as needed]` | | |
+## Individual Contributions
 
-## Contribution record
+### 1. Sai Kiran — Root Finding and GitHub Repository
 
-Fill each row based on work that was actually completed. A single person may own more than one area; shared work should be marked as shared.
+- Implemented the root-finding methods: Bisection, Newton-Raphson, and Secant methods.
+- Worked on the root-finding module in `src/root_finding.c`.
+- Created and managed the project's GitHub repository to maintain and share the project code.
+- Contributed to integrating the root-finding functionality into the Numerical Recipes Library.
 
-| Work area | Contributor(s) | Evidence / files |
-|---|---|---|
-| Numerical algorithm implementation | `[Name(s)]` | `src/*.c` |
-| Public API and header documentation | `[Name(s)]` | `include/numerical_recipes.h` |
-| Build system and static library | `[Name(s)]` | `Makefile` |
-| Demonstration applications | `[Name(s)]` | `examples/*.c` |
-| Unit, robustness, and failure tests | `[Name(s)]` | `tests/*.c` |
-| Technical documentation | `[Name(s)]` | `README.md`, `documentation/*.md` |
-| Version control, integration, and final verification | `[Name(s)]` | Git history, test logs |
+### 2. Saketh — Numerical Differentiation and Project Explanation
 
-## Collaboration and verification
+- Implemented the numerical differentiation methods: Forward Difference, Backward Difference, and Central Difference.
+- Worked on the differentiation module in `src/differentiation.c`.
+- Contributed to explaining the project's objectives, design, and functionality.
 
-Describe how tasks were divided, reviewed, integrated, and tested. Include only practices that occurred—for example, code review, shared debugging, branch review, or independent testing.
+### 3. Jahnavi — Interpolation and Library Research
 
-## Version-control evidence
+- Implemented the interpolation methods: Linear Interpolation, Lagrange Interpolation, and Newton Interpolation.
+- Worked on the interpolation module in `src/interpolation.c`.
+- Researched existing Numerical Recipes and numerical-methods libraries to understand the algorithms, functionality, and approaches already available.
 
-For the final submission, preserve the repository's commit history and identify meaningful commits for implementation, tests, documentation, and integration. If the course requires a contribution graph or per-member activity report, attach the requested Git hosting evidence separately.
+## Joint Contributions
 
-## Declaration
+All three team members collaborated on preparing the PowerPoint presentation for the project. The presentation covered the project's objectives, implemented numerical methods, library design, and overall functionality.
 
-Each team member should verify that this record accurately describes their contribution and complies with the course's collaboration and AI-assistance rules.
+The team also worked toward bringing the individual modules together into a modular numerical library.
+
+## Summary of Responsibilities
+
+| Team Member       | Primary Responsibility                                             |
+| ----------------- | ------------------------------------------------------------------ |
+| Sai Kiran         | Root-finding methods and GitHub repository creation                |
+| Saketh            | Numerical differentiation and project explanation                  |
+| Jahnavi           | Interpolation methods and research on existing numerical libraries |
+| All Three Members | PowerPoint presentation                                            |
+
+## Conclusion
+
+The project was divided into three main numerical-methods areas: root finding, numerical differentiation, and interpolation. Each team member took primary responsibility for one area, allowing the modules to be developed separately and integrated into a common C11 library. The team jointly prepared the project presentation to communicate the design, implementation, and functionality of the library.

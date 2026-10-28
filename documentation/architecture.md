@@ -80,11 +80,13 @@ The public functions preserve their declared return types. For detected invalid 
 
 This policy communicates many failure conditions without changing the API to return a separate status code. It also means callers should not treat every finite value as proof of convergence or high accuracy.
 
-## 6. Memory and ownership
+## 6. Data representation, memory, and ownership
+
+The current API uses scalar `double` values, function pointers, and parallel `x_values[]` / `y_values[]` arrays for polynomial interpolation. It does not define a custom public `struct` or container type. The caller supplies the point count explicitly through `size_t n`.
 
 Input arrays and callback functions remain under caller control. The library does not retain them after a call, and interpolation routines do not modify the caller's arrays. Newton interpolation allocates temporary storage internally and releases it before returning after allocation. If allocation fails, it reports the failure and returns `NAN`.
 
-See [Memory Management](memory_management.md) for allocation-failure testing and ownership details.
+See [Data Structures and Data Representation](data_structures.md) for the data contracts, and [Memory Management](memory_management.md) for allocation-failure testing and ownership details.
 
 ## 7. Extension points
 

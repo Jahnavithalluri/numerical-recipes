@@ -15,10 +15,11 @@ Use this checklist before creating the final ZIP or submitting the repository.
 ## Design and documentation
 
 - [ ] Public header documents all exported routines and failure behavior.
-- [ ] Architecture, algorithms, API, testing, and memory-management documentation are included.
+- [ ] Architecture, data structures, algorithms, API, testing, and memory-management documentation are included.
+- [ ] `documentation/data_structures.md` accurately describes scalar values, callbacks, interpolation arrays, `size_t n`, and Newton interpolation's temporary buffer.
 - [ ] `README.md` build and run commands match the actual Makefile.
 - [ ] Known numerical limitations are described.
-- [ ] Team-contribution information is completed truthfully.
+- [ ] Team-contribution information is completed truthfully with both students' names and actual contributions; no placeholders remain.
 - [ ] References and attribution are accurate; course-required AI disclosure is included.
 - [ ] No unsupported claim is made about sanitizer runs, code coverage, or testing.
 
