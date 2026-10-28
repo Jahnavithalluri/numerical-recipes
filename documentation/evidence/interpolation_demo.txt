@@ -1,0 +1,66 @@
+
+============================================================
+ NUMERICAL INTERPOLATION LIBRARY - DEMO
+============================================================
+Comparison tolerance: 1.0e-008
+This demo uses the public numerical_recipes.h API.
+
+============================================================
+ 1. BASIC ACCURACY: LINEAR DATA
+============================================================
+Data: (1,2), (2,4), (3,6); query x = 2.50
+Reference from y = 2x: 5.00000000
+
+Method                    Estimated      Reference     Abs. Error  Status
+----------------------------------------------------------------------------
+Linear                   5.00000000     5.00000000     0.000e+000  PASS
+Lagrange                 5.00000000     5.00000000     0.000e+000  PASS
+Newton                   5.00000000     5.00000000     0.000e+000  PASS
+
+============================================================
+ 2. POLYNOMIAL RECONSTRUCTION: y = x^2
+============================================================
+Data: (1,1), (2,4), (3,9); query x = 2.50
+Reference from y = x^2: 6.25000000
+A straight line is not expected to reproduce a quadratic.
+
+Method                    Estimated      Reference     Abs. Error  Status
+----------------------------------------------------------------------------
+Lagrange                 6.25000000     6.25000000     0.000e+000  PASS
+Newton                   6.25000000     6.25000000     0.000e+000  PASS
+
+============================================================
+ 3. PRACTICAL APPLICATION: TEMPERATURE ESTIMATION
+============================================================
+Illustrative observations (hour, deg C):
+  (9:00, 24), (10:00, 27), (11:00, 31), (12:00, 34)
+Estimate at 10:30 (x = 10.5 hours).
+References are interpolation-model values, not actual
+temperature measurements at 10:30.
+
+Method                    Estimated      Reference     Abs. Error  Status
+----------------------------------------------------------------------------
+Linear (10-11)          29.00000000    29.00000000     0.000e+000  PASS
+Lagrange (all 4)        29.00000000    29.00000000     0.000e+000  PASS
+Newton (all 4)          29.00000000    29.00000000     0.000e+000  PASS
+
+============================================================
+ 4. ERROR HANDLING: EXPECTED REJECTIONS
+============================================================
+These calls intentionally supply invalid inputs.
+Library diagnostics on stderr are expected.
+
+Linear: identical x coordinates             PASS
+  Returned: NAN (expected)
+Lagrange: duplicate x coordinates           PASS
+  Returned: NAN (expected)
+
+============================================================
+ DEMONSTRATION SUMMARY
+============================================================
+Checks passed: 10 / 10
+Successful calculation checks: 8
+Expected invalid-input checks: 2
+DEMO STATUS: ALL CHECKS PASSED
+Linear Interpolation Error: x0 and x1 must be different.
+Lagrange Interpolation Error: Duplicate x values at indices 1 and 2.

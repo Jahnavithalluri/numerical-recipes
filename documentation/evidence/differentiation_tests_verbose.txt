@@ -1,0 +1,308 @@
+====================================
+ NUMERICAL DIFFERENTIATION TESTS
+====================================
+
+--- Forward Difference ---
+[PASS] Square at x=3, h=0.1
+       Expected : 6.1
+       Actual   : 6.1
+       Abs Error: 1.243450e-014
+       Tolerance: 1.000000e-009
+[PASS] Square at x=0, h=0.1
+       Expected : 0.1
+       Actual   : 0.1
+       Abs Error: 1.387779e-017
+       Tolerance: 1.000000e-009
+[PASS] Square at negative x
+       Expected : -5.9
+       Actual   : -5.9
+       Abs Error: 1.776357e-015
+       Tolerance: 1.000000e-009
+[PASS] Linear function
+       Expected : 2
+       Actual   : 2
+       Abs Error: 1.776357e-015
+       Tolerance: 1.000000e-009
+[PASS] Constant function
+       Expected : 0
+       Actual   : 0
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Cube at x=2, h=0.1
+       Expected : 12.61
+       Actual   : 12.61
+       Abs Error: 1.065814e-014
+       Tolerance: 1.000000e-009
+[PASS] NULL function pointer
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] x is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] x is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h is zero
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h is negative
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h too small to change x
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] x + h overflows
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Function returns NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Function returns infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Nearby function value invalid
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Derivative calculation overflows
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+
+--- Backward Difference ---
+[PASS] Square at x=3, h=0.1
+       Expected : 5.9
+       Actual   : 5.9
+       Abs Error: 1.776357e-015
+       Tolerance: 1.000000e-009
+[PASS] Square at x=0, h=0.1
+       Expected : -0.1
+       Actual   : -0.1
+       Abs Error: 1.387779e-017
+       Tolerance: 1.000000e-009
+[PASS] Square at negative x
+       Expected : -6.1
+       Actual   : -6.1
+       Abs Error: 1.243450e-014
+       Tolerance: 1.000000e-009
+[PASS] Linear function
+       Expected : 2
+       Actual   : 2
+       Abs Error: 1.776357e-015
+       Tolerance: 1.000000e-009
+[PASS] Constant function
+       Expected : 0
+       Actual   : 0
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Cube at x=2, h=0.1
+       Expected : 11.41
+       Actual   : 11.41
+       Abs Error: 8.881784e-015
+       Tolerance: 1.000000e-009
+[PASS] NULL function pointer
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] x is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] x is negative infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h is zero
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h is negative
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h too small to change x
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] x - h overflows
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Function returns NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Function returns infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Nearby function value invalid
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Derivative calculation overflows
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+
+--- Central Difference ---
+[PASS] Square at x=3, h=0.1
+       Expected : 6
+       Actual   : 6
+       Abs Error: 5.329071e-015
+       Tolerance: 1.000000e-009
+[PASS] Square at x=0, h=0.1
+       Expected : 0
+       Actual   : 0
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Square at negative x
+       Expected : -6
+       Actual   : -6
+       Abs Error: 5.329071e-015
+       Tolerance: 1.000000e-009
+[PASS] Linear function
+       Expected : 2
+       Actual   : 2
+       Abs Error: 1.776357e-015
+       Tolerance: 1.000000e-009
+[PASS] Constant function
+       Expected : 0
+       Actual   : 0
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Cube at x=2, h=0.1
+       Expected : 12.01
+       Actual   : 12.01
+       Abs Error: 8.881784e-015
+       Tolerance: 1.000000e-009
+[PASS] NULL function pointer
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] x is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] x is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h is zero
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h is negative
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] h too small to change x
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] x + h overflows
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] x - h overflows
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Function returns NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Function returns infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Nearby function value invalid
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Derivative calculation overflows
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+
+====================================
+ TEST SUMMARY
+====================================
+Total tests: 58
+Passed:      58
+Failed:      0
+
+ALL TESTS PASSED!
+Forward Difference Error: Function pointer is NULL.
+Forward Difference Error: x must be finite.
+Forward Difference Error: x must be finite.
+Forward Difference Error: h must be finite and positive.
+Forward Difference Error: h must be finite and positive.
+Forward Difference Error: h must be finite and positive.
+Forward Difference Error: h must be finite and positive.
+Forward Difference Error: x + h is not a valid distinct point.
+Forward Difference Error: x + h is not a valid distinct point.
+Forward Difference Error: Function returned a non-finite value.
+Forward Difference Error: Function returned a non-finite value.
+Forward Difference Error: Function returned a non-finite value.
+Forward Difference Error: x + h is not a valid distinct point.
+Backward Difference Error: Function pointer is NULL.
+Backward Difference Error: x must be finite.
+Backward Difference Error: x must be finite.
+Backward Difference Error: h must be finite and positive.
+Backward Difference Error: h must be finite and positive.
+Backward Difference Error: h must be finite and positive.
+Backward Difference Error: h must be finite and positive.
+Backward Difference Error: x - h is not a valid distinct point.
+Backward Difference Error: x - h is not a valid distinct point.
+Backward Difference Error: Function returned a non-finite value.
+Backward Difference Error: Function returned a non-finite value.
+Backward Difference Error: Function returned a non-finite value.
+Backward Difference Error: x - h is not a valid distinct point.
+Central Difference Error: Function pointer is NULL.
+Central Difference Error: x must be finite.
+Central Difference Error: x must be finite.
+Central Difference Error: h must be finite and positive.
+Central Difference Error: h must be finite and positive.
+Central Difference Error: h must be finite and positive.
+Central Difference Error: h must be finite and positive.
+Central Difference Error: x + h is not a valid distinct point.
+Central Difference Error: x + h is not a valid distinct point.
+Central Difference Error: x - h is not a valid distinct point.
+Central Difference Error: Function returned a non-finite value.
+Central Difference Error: Function returned a non-finite value.
+Central Difference Error: Function returned a non-finite value.
+Central Difference Error: x + h is not a valid distinct point.

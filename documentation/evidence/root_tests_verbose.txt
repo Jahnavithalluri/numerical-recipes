@@ -1,0 +1,283 @@
+====================================
+ ROOT FINDING MODULE TESTS
+====================================
+
+--- Bisection Method ---
+[PASS] Root of x^2 - 2
+       Expected : 1.41421356237
+       Actual   : 1.41421413422
+       Abs Error: 5.718432e-007
+       Tolerance: 1.000000e-004
+[PASS] Left endpoint is root
+       Expected : 5
+       Actual   : 5
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Right endpoint is root
+       Expected : 5
+       Actual   : 5
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Linear function root
+       Expected : 5
+       Actual   : 5
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] NULL function pointer
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Left endpoint is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Left endpoint is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Right endpoint is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Right endpoint is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Tolerance is zero
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Tolerance is negative
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Tolerance is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Tolerance is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] a greater than b
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] a equal to b
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Interval does not bracket a root
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] f(a) returns NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] f(b) returns infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] f(midpoint) returns NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+
+--- Newton-Raphson Method ---
+[PASS] Root of x^2 - 2
+       Expected : 1.41421356237
+       Actual   : 1.41421356237
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-006
+[PASS] Exact root
+       Expected : 5
+       Actual   : 5
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Linear function from another guess
+       Expected : 5
+       Actual   : 5
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] NULL function pointer
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] NULL derivative pointer
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Initial guess is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Initial guess is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Tolerance is zero
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Tolerance is negative
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Tolerance is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Tolerance is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Function returns NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Function returns infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Derivative returns NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Derivative returns infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Derivative is zero
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Next approximation overflows
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+
+--- Secant Method ---
+[PASS] Root of x^2 - 2
+       Expected : 1.41421356237
+       Actual   : 1.41421356237
+       Abs Error: 2.220446e-016
+       Tolerance: 1.000000e-004
+[PASS] First guess is exact root
+       Expected : 5
+       Actual   : 5
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Second guess is exact root
+       Expected : 5
+       Actual   : 5
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Linear function from two guesses
+       Expected : 5
+       Actual   : 5
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] NULL function pointer
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] First guess is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] First guess is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Second guess is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Second guess is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Tolerance is zero
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Tolerance is negative
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Tolerance is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Tolerance is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Equal initial guesses
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] f(x0) returns NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] f(x1) returns infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Equal function values
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+
+====================================
+ TEST SUMMARY
+====================================
+Total tests: 53
+Passed:      53
+Failed:      0
+
+ALL TESTS PASSED!
+Bisection Error: Function pointer is NULL.
+Bisection Error: Left endpoint a must be finite.
+Bisection Error: Left endpoint a must be finite.
+Bisection Error: Right endpoint b must be finite.
+Bisection Error: Right endpoint b must be finite.
+Bisection Error: Tolerance must be finite and positive.
+Bisection Error: Tolerance must be finite and positive.
+Bisection Error: Tolerance must be finite and positive.
+Bisection Error: Tolerance must be finite and positive.
+Bisection Error: Left endpoint a must be less than b.
+Bisection Error: Left endpoint a must be less than b.
+Bisection Error: f(a) and f(b) have the same sign; root is not bracketed.
+Bisection Error: f(a) returned a non-finite value.
+Bisection Error: f(b) returned a non-finite value.
+Bisection Error: f(midpoint) returned a non-finite value at iteration 1.
+Newton-Raphson Error: Function pointer is NULL.
+Newton-Raphson Error: Derivative function pointer is NULL.
+Newton-Raphson Error: Initial guess must be finite.
+Newton-Raphson Error: Initial guess must be finite.
+Newton-Raphson Error: Tolerance must be finite and positive.
+Newton-Raphson Error: Tolerance must be finite and positive.
+Newton-Raphson Error: Tolerance must be finite and positive.
+Newton-Raphson Error: Tolerance must be finite and positive.
+Newton-Raphson Error: Function returned a non-finite value at iteration 1.
+Newton-Raphson Error: Function returned a non-finite value at iteration 1.
+Newton-Raphson Error: Derivative returned a non-finite value at iteration 1.
+Newton-Raphson Error: Derivative returned a non-finite value at iteration 1.
+Newton-Raphson Error: Derivative is zero at iteration 1; division by zero avoided.
+Newton-Raphson Error: Next approximation became non-finite at iteration 1.
+Secant Error: Function pointer is NULL.
+Secant Error: First initial guess x0 must be finite.
+Secant Error: First initial guess x0 must be finite.
+Secant Error: Second initial guess x1 must be finite.
+Secant Error: Second initial guess x1 must be finite.
+Secant Error: Tolerance must be finite and positive.
+Secant Error: Tolerance must be finite and positive.
+Secant Error: Tolerance must be finite and positive.
+Secant Error: Tolerance must be finite and positive.
+Secant Error: Initial guesses x0 and x1 must be different.
+Secant Error: f(x0) returned a non-finite value.
+Secant Error: f(x1) returned a non-finite value.
+Secant Error: Function values are equal at iteration 1; division by zero avoided.

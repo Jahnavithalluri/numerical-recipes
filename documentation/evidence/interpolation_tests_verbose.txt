@@ -1,0 +1,263 @@
+====================================
+ NUMERICAL INTERPOLATION TESTS
+====================================
+
+--- Linear Interpolation ---
+[PASS] Midpoint
+       Expected : 10
+       Actual   : 10
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Left endpoint
+       Expected : 0
+       Actual   : 0
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Right endpoint
+       Expected : 20
+       Actual   : 20
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Extrapolation to the right
+       Expected : 30
+       Actual   : 30
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Extrapolation to the left
+       Expected : -10
+       Actual   : -10
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Negative coordinates
+       Expected : 0
+       Actual   : 0
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Constant function
+       Expected : 5
+       Actual   : 5
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Reversed x coordinates
+       Expected : 10
+       Actual   : 10
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Duplicate x coordinates
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] x0 is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] y0 is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] x1 is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] y1 is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Query x is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Query x is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Denominator overflows
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Result becomes non-finite
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+
+--- Lagrange Interpolation ---
+[PASS] Quadratic at x=1.5
+       Expected : 2.25
+       Actual   : 2.25
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Known point x=0
+       Expected : 0
+       Actual   : 0
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Known point x=1
+       Expected : 1
+       Actual   : 1
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Known point x=2
+       Expected : 4
+       Actual   : 4
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Extrapolation at x=3
+       Expected : 9
+       Actual   : 9
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Negative query x=-1
+       Expected : 1
+       Actual   : 1
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Single data point
+       Expected : 7
+       Actual   : 7
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Cubic polynomial
+       Expected : 3.375
+       Actual   : 3.375
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Duplicate x coordinates
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] NULL x array
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] NULL y array
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Zero data points
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Query x is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Query x is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Array contains NAN x
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Array contains infinite y
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+
+--- Newton Interpolation ---
+[PASS] Quadratic at x=1.5
+       Expected : 2.25
+       Actual   : 2.25
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Known point x=0
+       Expected : 0
+       Actual   : 0
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Known point x=1
+       Expected : 1
+       Actual   : 1
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Known point x=2
+       Expected : 4
+       Actual   : 4
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Extrapolation at x=3
+       Expected : 9
+       Actual   : 9
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Negative query x=-1
+       Expected : 1
+       Actual   : 1
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Single data point
+       Expected : 7
+       Actual   : 7
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Cubic polynomial
+       Expected : 3.375
+       Actual   : 3.375
+       Abs Error: 0.000000e+000
+       Tolerance: 1.000000e-009
+[PASS] Duplicate x coordinates
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] NULL x array
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] NULL y array
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Zero data points
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Query x is NAN
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Query x is infinity
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Array contains NAN x
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+[PASS] Array contains infinite y
+       Expected : NAN
+       Actual   : nan
+       Status   : Expected failure handled
+
+====================================
+ TEST SUMMARY
+====================================
+Total tests: 49
+Passed:      49
+Failed:      0
+
+ALL TESTS PASSED!
+Linear Interpolation Error: x0 and x1 must be different.
+Linear Interpolation Error: x0 must be finite.
+Linear Interpolation Error: y0 must be finite.
+Linear Interpolation Error: x1 must be finite.
+Linear Interpolation Error: y1 must be finite.
+Linear Interpolation Error: x must be finite.
+Linear Interpolation Error: x must be finite.
+Linear Interpolation Error: x1 - x0 overflowed.
+Linear Interpolation Error: Calculated result is not finite.
+Lagrange Interpolation Error: Duplicate x values at indices 1 and 2.
+Lagrange Interpolation Error: x_values array is NULL.
+Lagrange Interpolation Error: y_values array is NULL.
+Lagrange Interpolation Error: Number of points must be greater than zero.
+Lagrange Interpolation Error: Interpolation point x must be finite.
+Lagrange Interpolation Error: Interpolation point x must be finite.
+Lagrange Interpolation Error: x_values[1] is not finite.
+Lagrange Interpolation Error: y_values[1] is not finite.
+Newton Interpolation Error: Duplicate x values at indices 2 and 1.
+Newton Interpolation Error: x_values array is NULL.
+Newton Interpolation Error: y_values array is NULL.
+Newton Interpolation Error: Number of points must be greater than zero.
+Newton Interpolation Error: Interpolation point x must be finite.
+Newton Interpolation Error: Interpolation point x must be finite.
+Newton Interpolation Error: x_values[1] is not finite.
+Newton Interpolation Error: y_values[1] is not finite.

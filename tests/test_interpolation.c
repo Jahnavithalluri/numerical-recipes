@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stddef.h>
 #include <math.h>
 #include "numerical_recipes.h"
@@ -7,35 +8,64 @@ static int passed = 0;
 static int failed = 0;
 
 /* Test helpers */
-static void check_close(const char *name, double actual,
-                        double expected, double tolerance)
+static int verbose = 0;
+
+/* By default show concise results; --verbose shows numerical evidence.
+   Failures always include expected and actual values. */
+static void check_close(const char *name,
+                        double actual,
+                        double expected,
+                        double tolerance)
 {
-    if (isfinite(actual) && fabs(actual - expected) <= tolerance) {
-        printf("PASSED: %s\n", name);
+    double error = fabs(actual - expected);
+    int ok = isfinite(actual) && isfinite(expected) &&
+             isfinite(error) && error <= tolerance;
+    printf("[%s] %s\n", ok ? "PASS" : "FAIL", name);
+    if (verbose || !ok) {
+        printf("       Expected : %.12g\n", expected);
+        printf("       Actual   : %.12g\n", actual);
+        printf("       Abs Error: %.6e\n", error);
+        printf("       Tolerance: %.6e\n", tolerance);
+    }
+    if (ok) {
         passed++;
     } else {
-        printf("FAILED: %s\n", name);
-        printf("  Expected: %.12f\n", expected);
-        printf("  Actual:   %.12f\n", actual);
         failed++;
     }
 }
 
 static void check_nan(const char *name, double actual)
 {
-    if (isnan(actual)) {
-        printf("PASSED: %s\n", name);
+    int ok = isnan(actual);
+    printf("[%s] %s\n", ok ? "PASS" : "FAIL", name);
+    if (verbose || !ok) {
+        printf("       Expected : NAN\n");
+        printf("       Actual   : %.12g\n", actual);
+        printf("       Status   : %s\n",
+               ok ? "Expected failure handled" : "Unexpected result");
+    }
+    if (ok) {
         passed++;
     } else {
-        printf("FAILED: %s\n", name);
-        printf("  Expected: NAN\n");
-        printf("  Actual:   %.12f\n", actual);
         failed++;
     }
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
+    int i;
+    for (i = 1; i < argc; ++i) {
+        if (strcmp(argv[i], "--verbose") == 0 || strcmp(argv[i], "-v") == 0) {
+            verbose = 1;
+        } else if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "-h") == 0) {
+            printf("Usage: %s [--verbose|-v] [--help|-h]\n", argv[0]);
+            return 0;
+        } else {
+            fprintf(stderr, "Unknown option: %s\n", argv[i]);
+            fprintf(stderr, "Usage: %s [--verbose|-v]\n", argv[0]);
+            return 2;
+        }
+    }
     const double tolerance = 1e-9;
     const double x_values[] = {0.0, 1.0, 2.0};
     const double y_values[] = {0.0, 1.0, 4.0};

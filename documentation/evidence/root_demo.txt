@@ -1,0 +1,74 @@
+
+============================================================
+NUMERICAL RECIPES LIBRARY - ROOT FINDING DEMO
+============================================================
+Methods: Bisection, Newton-Raphson, Secant
+Output includes absolute error and |f(root)| residual.
+Status PASS requires a finite result and residual <= 1e-6.
+
+============================================================
+1. MATHEMATICAL EXAMPLE: SQUARE ROOT OF TWO
+============================================================
+Equation: x^2 - 2 = 0
+Reference root: 1.414213562373
+Requested tolerance: 1.0e-008
+Bisection interval: [1, 2]
+Newton initial guess: 1.5
+Secant initial guesses: 1, 2
+Method                       Root     Abs. Error       Residual    Status
+--------------------------------------------------------------------------
+Bisection             1.414213561     1.851e-009     5.237e-009      PASS
+Newton-Raphson        1.414213562     0.000e+000     2.734e-016      PASS
+Secant                1.414213562     2.220e-016     9.014e-016      PASS
+
+============================================================
+2. TRANSCENDENTAL EXAMPLE: COS(X) = X
+============================================================
+Equation: cos(x) - x = 0 (radians)
+Reference root: 0.739085133215
+Requested tolerance: 1.0e-008
+Bisection interval: [0, 1]
+Newton initial guess: 0.5
+Secant initial guesses: 0, 1
+Method                       Root     Abs. Error       Residual    Status
+--------------------------------------------------------------------------
+Bisection             0.739085130     2.822e-009     4.722e-009      PASS
+Newton-Raphson        0.739085133     0.000e+000     0.000e+000      PASS
+Secant                0.739085133     0.000e+000     0.000e+000      PASS
+
+============================================================
+3. PRACTICAL APPLICATION: PROJECTILE MOTION
+============================================================
+Height model: h(t) = 20t - 4.905t^2 (meters)
+Question: When does the projectile DESCEND through 15 m?
+Assumptions: no air resistance; g = 9.81 m/s^2
+Reference time: 3.086753366970 seconds
+Requested tolerance: 1.0e-008
+Bisection interval: [2.5, 4] seconds
+Newton initial guess: 3 seconds
+Secant initial guesses: 2.5, 4 seconds
+Method                       Root     Abs. Error       Residual    Status
+--------------------------------------------------------------------------
+Bisection             3.086753367     4.554e-010     4.682e-009      PASS
+Newton-Raphson        3.086753367     0.000e+000     1.391e-015      PASS
+Secant                3.086753367     4.441e-016     3.175e-015      PASS
+Interpretation: the root is a time in seconds; the residual
+is the remaining height difference in meters.
+
+============================================================
+4. ERROR HANDLING: INVALID BISECTION INTERVAL
+============================================================
+Equation: x^2 - 2 = 0
+Invalid interval: [2, 3]; both endpoint values are positive.
+Expected behavior: return NAN and print a diagnostic.
+Note: the library diagnostic below is an EXPECTED error.
+Result: NAN | Status: PASS (invalid input rejected)
+
+============================================================
+DEMONSTRATION SUMMARY
+============================================================
+Checks passed: 10 / 10
+Successful numerical examples: 3 problems x 3 methods
+Expected error-handling examples: 1
+DEMO STATUS: ALL CHECKS PASSED
+Bisection Error: f(a) and f(b) have the same sign; root is not bracketed.

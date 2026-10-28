@@ -1,0 +1,49 @@
+============================================================
+ NUMERICAL DIFFERENTIATION - LIBRARY DEMONSTRATION
+============================================================
+
+1. QUADRATIC FUNCTION
+Function: f(x) = x^2
+Evaluation point: 3.0000 | Step size: 0.1000
+Analytical derivative: 6.00000000 | Allowed absolute error: 1.010e-001
+Method                   Derivative     Abs. Error  Status
+----------------------------------------------------------------
+Forward Difference       6.10000000     1.000e-001  PASS
+Backward Difference      5.90000000     1.000e-001  PASS
+Central Difference       6.00000000     5.329e-015  PASS
+
+2. TRIGONOMETRIC FUNCTION
+Function: f(x) = sin(x)
+Evaluation point: 0.5000 | Step size: 0.0100
+Analytical derivative: 0.87758256 | Allowed absolute error: 1.000e-002
+Method                   Derivative     Abs. Error  Status
+----------------------------------------------------------------
+Forward Difference       0.87517083     2.412e-003  PASS
+Backward Difference      0.87996504     2.382e-003  PASS
+Central Difference       0.87756794     1.463e-005  PASS
+
+3. PRACTICAL APPLICATION: VELOCITY
+Function: s(t) = 5t^2 + 2t + 1 metres
+Evaluation point: 3.0000 | Step size: 0.0100
+Analytical derivative: 32.00000000 | Allowed absolute error: 5.100e-002
+Method                   Derivative     Abs. Error  Status
+----------------------------------------------------------------
+Forward Difference      32.05000000     5.000e-002  PASS
+Backward Difference     31.95000000     5.000e-002  PASS
+Central Difference      32.00000000     6.821e-013  PASS
+Interpretation: at t = 3 s, the expected velocity is 32 m/s.
+
+4. ERROR-HANDLING DEMONSTRATION
+The following calls intentionally use invalid inputs.
+Zero step size (h = 0)               PASS (NAN returned)
+Non-finite evaluation point (NAN)    PASS (NAN returned)
+
+============================================================
+ DEMONSTRATION SUMMARY
+============================================================
+Checks passed: 11 / 11
+Successful numerical calculation checks: 9
+Expected invalid-input checks: 2
+DEMO STATUS: ALL CHECKS PASSED
+Central Difference Error: h must be finite and positive.
+Forward Difference Error: x must be finite.

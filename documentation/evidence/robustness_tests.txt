@@ -1,0 +1,12 @@
+[PASS] Lagrange: 256 points, zero dataset (expected=0, actual=0)
+[PASS] Newton: 256 points, zero dataset (expected=0, actual=0)
+[PASS] Lagrange: 256 points, known node (expected=3, actual=3)
+[PASS] Newton: 256 points, known node (expected=3, actual=3)
+[PASS] Caller retains ownership; input arrays unchanged
+[PASS] Newton: 500 repeated calls
+[PASS] Newton: allocation-size multiplication overflow (actual=nan)
+[PASS] Newton: duplicate nodes in allocated input array (actual=nan)
+
+ROBUSTNESS SUMMARY: 8 passed, 0 failed, 8 total
+Newton Interpolation Error: Requested array size is too large.
+Newton Interpolation Error: Duplicate x values at indices 1 and 0.
